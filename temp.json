@@ -1,0 +1,15 @@
+{   
+    'name': 'GetSceneList',
+    'datain': {
+        'currentPreviewSceneName': None,
+        'currentPreviewSceneUuid': None,
+        'currentProgramSceneName': 'Escena',
+        'currentProgramSceneUuid': 'fd494763-76bb-459f-a19e-c0fc86e2c1c9',
+        'scenes': [
+            {'sceneIndex': 0, 'sceneName': 'Escena', 'sceneUuid': 'fd494763-76bb-459f-a19e-c0fc86e2c1c9'
+            }
+        ]
+    },
+    'dataout': {},
+    'status': True
+}

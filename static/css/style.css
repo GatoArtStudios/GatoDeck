@@ -1,0 +1,39 @@
+:root {
+    --color-dark-morado: rgb(75, 0, 130);
+    --color-ligth-morado: rgb(106, 90, 205);
+    --color-dark-add-morado: rgb(46, 8, 84);
+    --color-dark-gris: rgb(128, 128, 128);
+    --color-ligth-gris: rgb(211, 211, 211);
+    --color-dark-add-gris: rgb(85, 85, 85);
+    --color-text: white;
+}
+body {
+    background-color: var(--color-dark-morado);
+    color: var(--color-text);
+}
+button {
+    color: var(--color-ligth-gris);
+    background-color: var(--color-dark-gris);
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 10xp;
+    margin: 3px;
+    width: 130px;
+}
+button:hover {
+    color: var(--color-text);
+    background-color: var(--color-dark-add-gris);
+}
+.title-web {
+    color: var(--color-text);
+}
+.title-div {
+    text-align: center;
+}
+.div-btn {
+    text-align: center;
+}
+#btn-scenes {
+    text-align: center;
+    margin: 10px;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            GatoDeck
+        </title>
+        <meta lang="e">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+    </head>
+    <body>
+        <div class="title-div">
+            <h1 class="title-web">GatoDeck</h1>
+        </div>
+        <div id="btn-scenes">
+        </div>
+        <div class="div-btn">
+            <button id="btn-copy">Copiar</button>
+            <button id="btn-page">Pegar</button>
+            <button id="btn-paper">Paper</button>
+            <button id="btn-mute">Silenciar</button>
+            <button id="btn-ensor">Ensordecer</button>
+            <button id="btn-version">OBS Version</button>
+            <div id="resp"></div>
+        </div>
+        <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/socketio_connect.js') }}"></script>
+    </body>
+</html>
