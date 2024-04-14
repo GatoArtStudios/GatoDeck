@@ -14,7 +14,10 @@ def get_obs_version():
     Obtiene la version actual de OBS
     '''
     if connection == False:
-        client.reconnect()
+        try:
+            client.reconnect()
+        except Exception as e:
+            return f'Hubo un error: {e}'
     if connection:
         return f'Version actual: {client.call(requests.GetVersion()).getObsVersion()}'
     else:
@@ -24,9 +27,11 @@ def get_list_obs_scenes():
     '''
     Obtiene la lista de escenas disponibles en OBS.
     '''
-    list_scennes = []
     if connection == False:
-        client.reconnect()
+        try:
+            client.reconnect()
+        except Exception as e:
+            return 'Error al obtener la lista de escenas'
     if connection:
         # Obtener la losta de escenas
         try:
