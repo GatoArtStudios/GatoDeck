@@ -1,0 +1,12 @@
+Flask==3.0.3
+Flask-SocketIO==5.3.6
+keyboard==0.13.5
+oauthlib==3.2.2
+obs-websocket-py==1.0
+pillow==10.3.0
+PyAutoGUI==0.9.54
+pydub==0.25.1
+python-socketio==5.11.2
+requests==2.31.0
+websocket-client==1.7.0
+websockets==12.0
