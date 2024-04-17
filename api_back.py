@@ -16,4 +16,18 @@ def action_btn(action):
         keyboard.press_and_release('ctrl+shift+pagedown')
     elif action == 'ensor':
         keyboard.press_and_release('ctrl+shift+pageup')
+    elif action == 'next':
+        keyboard.press_and_release('next track')
+    elif action == 'previous':
+        keyboard.press_and_release('previous track')
+    elif action == 'play/pause':
+        keyboard.press_and_release('play/pause media')
+    elif action == 'stop':
+        keyboard.press_and_release('stop media')
+    elif action == 'volume-mute':
+        keyboard.press_and_release('volume mute')
+    elif action == 'volume-down':
+        keyboard.press_and_release('volume down')
+    elif action == 'volume-up':
+        keyboard.press_and_release('volume up')
     return f'Accion realizada: {action}'
