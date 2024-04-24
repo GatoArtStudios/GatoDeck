@@ -4,20 +4,6 @@ const socket = io();
 // funciones
 async function handleAction(action) {
     socket.emit('action', action)
-    // try {
-    //     const respose = await fetch('/api/v1', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({ action })
-    //     });
-    //     const data = await respose.json();
-    //     document.getElementById('resp').innerHTML = data.mensaje;
-    //     console.log(data.mensaje);
-    // } catch (error) {
-    //     console.error('error al realizar la accion:', error);
-    // }
 }
 
 // Checa la conexion con el socket

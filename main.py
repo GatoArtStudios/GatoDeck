@@ -17,35 +17,7 @@ socketio = SocketIO(app)
 def api_back():
     if request.method == 'POST':
         pass
-        # try:
-        #     data = request.json
-        #     if data.get('action'):
-        #         if data.get('action') == 'copy':
-        #             copy()
-        #             print('Accion realizada de copy')
-        #         elif data.get('action') == 'page':
-        #             page()
-        #             print('Accion realizada de page')
-        #         elif data.get('action') == 'paper':
-        #             paper()
-        #             print('Accion realizada de paper')
-        #         elif data.get('action') == 'version':
-        #             version = get_obs_version()
-        #             print('Accion realizada de version')
-        #             return jsonify({'mensaje': f'{version}'})
-        #         elif data.get('action') == 'mute':
-        #             mute_discord()
-        #             return jsonify({'mensaje': 'Accion realizada de Mute'})
-        #         elif data.get('action') == 'ensor':
-        #             ensor_discord()
-        #             return jsonify({'mensaje': 'Accion realizada de Ensor'})
-        #         else:
-        #             return jsonify({'mensaje': f'No se encontro accion'})
-        #         return jsonify({'mensaje': f'Accion {data.get("action")} realizada'})
-        #     else:
-        #         return jsonify({'mensaje': f'No se encontro accion'})
-        # except Exception as e:
-        #     return jsonify({'mensaje': f'Error {e}'})
+
 # Web Frontend
 
 @app.route('/')
