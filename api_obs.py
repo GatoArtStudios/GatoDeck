@@ -22,7 +22,7 @@ def get_obs_version():
         return f'Version actual: {client.call(requests.GetVersion()).getObsVersion()}'
     else:
         return 'Desconectado de obs | Soporte para Api V5'
-    
+
 def get_list_obs_scenes():
     '''
     Obtiene la lista de escenas disponibles en OBS.
