@@ -32,6 +32,12 @@ def not_found(error):
 
 @socketio.on('socket_data_obs')
 def socket_obs(data):
+    data1 = get_data1()
+    data3 = get_data3()
+    if data1:
+        socketio.emit('data-update1', data1)
+    if data3:
+        socketio.emit('data-update2', data3)
     list_scenes = get_list_obs_scenes()
     emit('post-list-scenes', list_scenes)
 
