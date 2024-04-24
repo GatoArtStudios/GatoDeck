@@ -1,9 +1,21 @@
 from obswebsocket import obsws, requests
+import json
 
 client = obsws(host='localhost', port=4455, password='123456')
 client.connect()
 
 data = client.call(requests.GetVersion())
+myJson = {
+    'name': data.name,
+    'availableRequests': data.datain['availableRequests'],
+    'obsVersion': data.datain['obsVersion'],
+    'obsWebSocketVersion': data.datain['obsWebSocketVersion'],
+    'platform': data.datain['platform'],
+    'platformDescription': data.datain['platformDescription'],
+    'rpcVersion': data.datain['rpcVersion'],
+    'supportedImageFormats': data.datain['supportedImageFormats']
+}
+print(f"{myJson} \n\n")
 # print(f'Data de GetVersion | Requests: {vars(data)}')
 print(f"Nombre de Llamada: {data.name}")
 print(f"Requests Validas: {data.datain['availableRequests']}")
@@ -40,7 +52,10 @@ print(f"Estado: {dataHotkey.status}")
 
 dataScennes = client.call(requests.GetSceneList())
 print(f"Datos de GetSceneList | Requests: {vars(dataScennes)}")
-
+print(f"Nombre de Llamada: {dataScennes.name}")
+print(f"Escena actual: {dataScennes.datain['currentPreviewSceneName']}")
+print(f"UID de Esecna actual: {dataScennes.datain['currentPreviewSceneUuid']}")
+print(f"Lista de escenas: {dataScennes.datain['scenes']}")
 
 
 
