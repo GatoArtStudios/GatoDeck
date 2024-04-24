@@ -17,12 +17,15 @@
         <div id="btn-scenes">
         </div>
         <div class="div-btn">
+            <input type="checkbox" class="cyberpunk-checkbox" id="sendDataCheckbox" checked>
             <button id="btn-copy">Copiar</button>
             <button id="btn-page">Pegar</button>
             <button id="btn-paper">Paper</button>
             <button id="btn-mute">Silenciar</button>
             <button id="btn-ensor">Ensordecer</button>
             <button id="btn-version">OBS Version</button>
+            <button id="btn-data">OBS data</button>
+            <button id="btn-Recording">OBS Recording</button>
             <br>
             <button id="btn-volume-down">🔉-</button>
             <button id="btn-previous">|◀◀</button>
@@ -31,6 +34,7 @@
             <button id="btn-volume-up">🔊+</button>
             <button id="btn-volume-mute">🔇</button>
             <div id="resp"></div>
+            <div id="OBSVersion"></div>
         </div>
         <script src="{{ url_for('static', filename='js/api.js') }}"></script>
         <script src="{{ url_for('static', filename='js/socketio_connect.js') }}"></script>
