@@ -15,7 +15,7 @@ myJson = {
     'rpcVersion': data.datain['rpcVersion'],
     'supportedImageFormats': data.datain['supportedImageFormats']
 }
-print(f"{myJson} \n\n")
+print(f"{myJson} \n\n ")
 # print(f'Data de GetVersion | Requests: {vars(data)}')
 print(f"Nombre de Llamada: {data.name}")
 print(f"Requests Validas: {data.datain['availableRequests']}")
