@@ -26,6 +26,9 @@ def get_obs_version():
 def get_list_obs_scenes():
     '''
     Obtiene la lista de escenas disponibles en OBS.
+    ```
+    def get_list_obs_scenes(): -> Dict and Str in console
+    ```
     '''
     if connection == False:
         try:
@@ -44,9 +47,49 @@ def get_list_obs_scenes():
             print(f'error {e}')
             return 'Error al obtener la lista de escenas.'
 
-def set_scenne(name):
+def set_scenne(name: str):
     '''
     Hay que pasarle el nombre de la escena a usar.
     '''
     client.call(requests.SetCurrentProgramScene(sceneName=name))
     print(f'Ejecutando funcion de cambiar escena {name}')
+
+def stream(action: str):
+    '''
+    Resibe una accion la cual para prender o apagar stream.
+    ```
+    def stream(action):
+        if action == 'stream-on':
+            client.call(requests.StartStream())
+            return f'Accion: {action}'
+        elif action == 'stream-off':
+            client.call(requests.StopStream())
+            return f'Accion: {action}'
+    ```
+    '''
+    if action == 'stream-on':
+        client.call(requests.StartStream())
+        return f'Accion: {action}'
+    elif action == 'stream-off':
+        client.call(requests.StopStream())
+        return f'Accion: {action}'
+
+def record(action: str):
+    '''
+    Resibe una accion la cual para prender o apagar grabacion.
+    ```
+    def record(action):
+        if action == 'record-on':
+            client.call(requests.StartRecord())
+            return f'Accion: {action}'
+        elif action == 'record-off':
+            client.call(requests.StopRecord())
+            return f'Accion: {action}'
+    ```
+    '''
+    if action == 'record-on':
+        client.call(requests.StartRecord())
+        return f'Accion: {action}'
+    elif action == 'record-off':
+        client.call(requests.StopRecord())
+        return f'Accion: {action}'
