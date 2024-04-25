@@ -159,3 +159,5 @@ def record(action: str):
     elif action == 'record-off':
         client.call(requests.StopRecord())
         return f'Accion: {action}'
+    elif action == 'record-toggle-pause':
+        client.call(requests.ToggleRecordPause())
