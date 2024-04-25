@@ -2,21 +2,31 @@
     --color-dark-morado: rgb(75, 0, 130);
     --color-ligth-morado: rgb(106, 90, 205);
     --color-dark-add-morado: rgb(46, 8, 84);
-    --color-dark-gris: rgb(128, 128, 128);
+    --color-dark-gris: rgb(173, 73, 219);
     --color-ligth-gris: rgb(211, 211, 211);
     --color-dark-add-gris: rgb(85, 85, 85);
     --color-text: white;
+    --color-1: rgb(169, 104, 255);
+    --color-2: rgb(115, 13, 251);
+    --color-3: rgb(74, 1, 171);
+    --color-4: rgb(46, 2, 104);
+    --color-5: rgb(0, 0, 1);
 }
 body {
-    background-color: var(--color-dark-morado);
+    background-color: var(--color-4);
     color: var(--color-text);
 }
 button {
     color: var(--color-ligth-gris);
-    background-color: var(--color-dark-gris);
-    border-radius: 6px 6px 6px 6px;
-    margin: 3px;
+    background-color: var(--color-2);
+    border-radius: 17px;
+    padding: 10px;
+    font-size: 15px;
+    margin: 10px;
     width: 160px;
+    border: 2px solid rgba(var(--color-1), 0.1);
+    /* box-shadow: inset 0px 5px 20px 3px rgba(0,0,0,0.75), 0px 5px 20px 3px rgba(0, 0, 0, 0.5), 0px -5px 20px 3px rgba(247, 247, 247, 0.4); Ancho, Alto, Radio Sombra, Radio Propagracion */
+    box-shadow: inset 0px -10px 10px -1px rgba(0, 0, 0, 0.4), inset 0px 10px 10px -1px rgba(255, 255, 255, 0.4), 0px 5px 20px 3px rgba(0, 0, 0, 0.5), 0px -5px 20px 3px rgba(247, 247, 247, 0.4); /* Ancho, Alto, Radio Sombra, Radio Propagracion */
     min-height: 60px;
     text-wrap: auto;
 }
@@ -31,8 +41,8 @@ button {
     width: 45px;
 }
 button:hover {
-    color: var(--color-text);
-    background-color: var(--color-dark-add-gris);
+    color: var(--color-1);
+    background-color: var(--color-3);
 }
 .title-web {
     color: var(--color-text);
