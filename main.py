@@ -4,6 +4,7 @@ import api_back
 from api_back import *
 from api_obs import *
 import os
+import time
 
 # configuraciones de Flask
 
@@ -50,6 +51,17 @@ def socket_obs(data):
 def socket_obs(data):
     emit('action-response', action_btn(data))
 
+@socketio.on('TestButton')
+def test_button(data):
+        simular_presion_y_suelta(data)
 
+
+# Función para simular la presión y liberación de una tecla
+def simular_presion_y_suelta(tecla):
+    # Simula la presión de la tecla
+    # Espera un breve momento (puedes ajustar este tiempo según necesites)
+    time.sleep(2)
+    keyboard.press_and_release(tecla)
+    print(tecla)
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=80, allow_unsafe_werkzeug=True, debug=True)

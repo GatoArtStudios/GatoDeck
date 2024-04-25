@@ -33,8 +33,12 @@
             <button id="btn-next">▶▶|</button>
             <button id="btn-volume-up">🔊+</button>
             <button id="btn-volume-mute">🔇</button>
+
             <div id="resp"></div>
             <div id="OBSVersion"></div>
+            <div id="buttonDataContainer"></div>
+            <input type="text" id="textInput">
+            <button id="buttonDatasend">Enviar</button>
         </div>
         <script src="{{ url_for('static', filename='js/api.js') }}"></script>
         <script src="{{ url_for('static', filename='js/socketio_connect.js') }}"></script>
