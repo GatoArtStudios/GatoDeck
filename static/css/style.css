@@ -14,11 +14,21 @@ body {
 button {
     color: var(--color-ligth-gris);
     background-color: var(--color-dark-gris);
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 10xp;
+    border-radius: 6px 6px 6px 6px;
     margin: 3px;
-    width: 130px;
+    width: 160px;
+    min-height: 60px;
+    text-wrap: auto;
+}
+.custom-bg-color {
+    background-color: var(--color-dark-morado);
+    color: var(--color-text);
+}
+.delete-button {
+    position: relative;
+    background-color: red;
+    height: 45px;
+    width: 45px;
 }
 button:hover {
     color: var(--color-text);

@@ -52,22 +52,21 @@ socket.on('post-list-scenes', function(data) {
         console.error('La data no es un array:', data);
     }
 });
-let sendDataCheckbox = document.getElementById('sendDataCheckbox');
 socket.on('data-update2', function(data) {
     // Parsear los datos JSON recibidos
-    if (sendDataCheckbox.checked) {
+
         const data2 = JSON.parse(data);
         console.log(data2)
         obsVersion = data2.obsVersion
         console.log("version obs", obsVersion)
- }
+ 
 
 });
 
 let ObsVer = document.getElementById('OBSVersion');
 socket.on('data-update1', function(data) {
 
-    if (sendDataCheckbox.checked) {
+
         const data1 = JSON.parse(data);
         console.log(data1)
         let obsVersion = null;
@@ -77,7 +76,7 @@ socket.on('data-update1', function(data) {
         console.log("version obs", data1.obsVersion)
 
         }
- }
+ 
 
 });
 
