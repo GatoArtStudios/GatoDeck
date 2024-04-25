@@ -17,7 +17,32 @@ actions = {
     'volume-down': 'volume down',
     'volume-up': 'volume up'
 }
-
+actions2 = {
+    "132": "start application 1",
+    "133": "browser search key",
+    "134": "start application 2",
+    "135": "select media",
+    "135": "play/pause media",
+    "140": "volume mute",
+    "141": "volume down",
+    "142": "volume up",
+    "57": "right shift",
+    "59": "right ctrl",
+    "61": "right alt",
+    "62": "alt",
+    "63": "ctrl",
+    "64": "left windows",
+    "65": "caps lock",
+    "70": "delete",
+    "71": "end",
+    "72": "page down",
+    "73": "page up",
+    "74": "home",
+    "75": "insert",
+    "76": "print screen",
+    "77": "scroll lock",
+    "78": "pause",
+}
 def action_btn(action):
     '''
     Ejecuta acciones de atajos de teclado.

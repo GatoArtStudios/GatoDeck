@@ -1,5 +1,26 @@
 from obswebsocket import obsws, requests
 import json
+import keyboard
+import time
+import os
+
+keylist = {}
+num = 0
+
+
+while True:
+    try:
+        key  = str(keyboard.read_key())
+        print(key)
+        if not key in keylist.values():
+            keylist[num] = key
+            num += 1
+            print(f'Agregada: {key}')
+    except KeyboardInterrupt:
+        print(keylist)
+        with open('Media.json', 'w') as a:
+            json.dump(keylist, a)
+        exit()
 
 client = obsws(host='localhost', port=4455, password='123456')
 client.connect()

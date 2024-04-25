@@ -58,10 +58,20 @@ def test_button(data):
 
 # Función para simular la presión y liberación de una tecla
 def simular_presion_y_suelta(tecla):
-    # Simula la presión de la tecla
-    # Espera un breve momento (puedes ajustar este tiempo según necesites)
-    time.sleep(2)
-    keyboard.press_and_release(tecla)
-    print(tecla)
+    try:
+        keyboard.press_and_release(tecla)
+        print(f"Tecla '{tecla}' existe y se puede presionar y soltar correctamente.")
+    except ValueError as e:
+        print(f"Tecla '{tecla}' no existe o no se puede presionar y soltar.")
+        for key, value in actions2.items():
+            if value.lower() == tecla.lower():
+                try:
+                    keyboard.press_and_release(key)
+                    print(f"Se encontró una tecla similar en actions2: '{value}', y se presionó y soltó correctamente.")
+                    break
+                except ValueError as e:
+                    print(f"No se pudo simular la tecla '{value}' desde actions2.")
+        else:
+            print("No se encontró ninguna tecla similar en actions2.")
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=80, allow_unsafe_werkzeug=True, debug=True)
