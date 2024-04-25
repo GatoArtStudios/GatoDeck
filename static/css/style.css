@@ -26,7 +26,7 @@ button {
     width: 160px;
     border: 2px solid rgba(var(--color-1), 0.1);
     /* box-shadow: inset 0px 5px 20px 3px rgba(0,0,0,0.75), 0px 5px 20px 3px rgba(0, 0, 0, 0.5), 0px -5px 20px 3px rgba(247, 247, 247, 0.4); Ancho, Alto, Radio Sombra, Radio Propagracion */
-    box-shadow: inset 0px -10px 10px -1px rgba(0, 0, 0, 0.4), inset 0px 10px 10px -1px rgba(255, 255, 255, 0.4), 0px 5px 20px 3px rgba(0, 0, 0, 0.5), 0px -5px 20px 3px rgba(247, 247, 247, 0.4); /* Ancho, Alto, Radio Sombra, Radio Propagracion */
+    box-shadow: inset 0px -5px 5px -1px rgba(255, 255, 255, 0.4), inset 0px 5px 5px -1px rgba(78, 78, 78, 0.4), 0px 5px 5px 3px rgba(78, 78, 78, 0.5), 0px -5px 5px 3px rgba(73, 73, 73, 0.4); /* Ancho, Alto, Radio Sombra, Radio Propagracion */
     min-height: 60px;
     text-wrap: auto;
 }
@@ -57,3 +57,78 @@ button:hover {
     text-align: center;
     margin: 10px;
 }
+.modal {
+    display: none; /* Initially hidden */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Transparent black background */
+  }
+  
+  .modal-dialog {
+    position: relative; /* Center the modal content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content; /* Allow responsive sizing */
+    margin: auto;
+    animation: modal-show 0.3s ease-in-out forwards; /* Animation for modal open */
+  }
+  
+  @keyframes modal-show {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .modal-content {
+    background-color: #fff; /* White content */
+    margin: 15px; /* Add some margin */
+    padding: 20px;
+    border: 1px solid #888; /* 1px grey border */
+    border-radius: 5px; /* Rounded corners */
+    animation: modal-fade 0.3s ease-in-out forwards; /* Animation for modal content fade */
+  }
+  
+  @keyframes modal-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e7e7e7; /* Light grey bottom border */
+  }
+  
+  .modal-title {
+    margin-bottom: 0; /* Remove default bottom margin */
+  }
+  
+  .close {
+    color: #fff; /* White text */
+    background-color: #007bff; /* Blue background */
+    opacity: 0.8; /* Semi-transparent */
+    padding: 0.5rem 0.75rem; /* Padding */
+    border: none;
+    border-radius: 0.25rem; /* Rounded corners */
+    cursor: pointer; /* Hand cursor on hover */
+  }
+  
+  .close:hover, .close:focus {
+    opacity: 1; /* Full opacity on hover/focus */
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end; /* Buttons at the end */
+    border-top: 1px solid #e7e7e7; /* Light grey top border */
+  }
+  
+  .btn {
+    margin: 5px; /* Add some margin between buttons */
+  }

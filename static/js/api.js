@@ -201,7 +201,6 @@ buttonElement.addEventListener('click', () => {
     }
 });*/
 //const inputElement = document.getElementById('textInput');
-const keyboardselect = document.getElementById('keyboardSelect');
 const keyboardButtonsContainer = document.getElementById('keyboardButtons');
 const toggleCheckboxes = document.getElementById('toggleCheckboxes');
 function toggleDeleteButtons() {
@@ -220,7 +219,7 @@ $(document).ready(function() {
         Object.entries(KeyboardList).forEach(([keyCode, keyName]) => {
             // Verificar si el elemento ya existe en el localStorage
             if (keyName) {
-                const $button = $('<button>', { class: 'button-container', text: keyName });
+                const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-5 px-4 rounded-lg", text: keyName });
                 $button.on('click', function() {
                     agregarBotonConX($(this).text()); // Agregar el botón junto con el texto al hacer clic en él
                     
@@ -238,7 +237,7 @@ $(document).ready(function() {
 
 // Función para agregar un botón con el botón de borrar asociado al HTML de la modal
 function agregarBotonConX(texto) {
-    const $button = $('<button>', { class: 'rounded-lg bg-sky-500 hover:bg-indigo-700', text: texto });
+    const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-5 px-4 rounded-lg", text: texto });
     
     const $deleteButton = $('<button>', { class: 'delete-button', text: 'X' }); // Botón de borrar
     
@@ -297,7 +296,31 @@ function agregarBotonConX(texto) {
     });
 });
 
-
+document.addEventListener('DOMContentLoaded', function() {
+    const openModalButton = document.getElementById('openModalButton');
+    const closeModalButtons = document.querySelectorAll('#closeModalButton');
+  
+    // Abrir modal al hacer clic en el botón
+    openModalButton.addEventListener('click', function() {
+      keyboardModal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    });
+  
+    // Cerrar modal al hacer clic en el botón de cerrar o fuera del modal
+    closeModalButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        keyboardModal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      });
+    });
+  
+    keyboardModal.addEventListener('click', function(event) {
+      if (event.target === keyboardModal) {
+        keyboardModal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+    });
+  });
 
 function guardarEstadoCheckboxes() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
