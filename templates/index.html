@@ -16,31 +16,31 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+    <link href="output.css" rel="stylesheet">
     </head>
-    <body class="custom-bg-color">
+    <body class="bg-sky-600 dark:bg-purple-800 text-cyan-50">
         
         <div class="title-div">
             <h1 class="title-web">GatoDeck</h1>
         </div>
         <div id="btn-scenes">
         </div>
-        <div class="div-btn ">
-            <button id="btn-copy" class="btn btn-primary btn-lg">Copiar</button>
-            <button id="btn-page"class="btn btn-primary btn-lg">Pegar</button>
-            <button id="btn-paper"class="btn btn-primary btn-lg">Paper</button>
-            <button id="btn-mute"class="btn btn-primary btn-lg">Silenciar</button>
-            <button id="btn-ensor"class="btn btn-primary btn-lg">Ensordecer</button>
-            <button id="btn-version"class="btn btn-primary btn-lg">OBS Version</button>
-            <button id="btn-data"class="btn btn-primary btn-lg">OBS data</button>
-            <button id="btn-Recording"class="btn btn-primary btn-lg">OBS Recording</button>
+        <div class="div-btn">
+            <button id="btn-copy" class"rounded-lg bg-sky-600 hover:bg-sky-800">Copiar</button>
+            <button id="btn-page"class="rounded-lg bg-sky-600 hover:bg-sky-800">Pegar</button>
+            <button id="btn-paper"class="rounded-lg bg-sky-600 hover:bg-sky-800">Paper</button>
+            <button id="btn-mute"class="rounded-lg bg-sky-600 hover:bg-sky-800">Silenciar</button>
+            <button id="btn-ensor"class="rounded-lg bg-sky-600 hover:bg-sky-800">Ensordecer</button>
+            <button id="btn-version"class="rounded-lg bg-sky-600 hover:bg-sky-800">OBS Version</button>
+            <button id="btn-data"class="rounded-lg bg-sky-600 hover:bg-sky-800">OBS data</button>
+            <button id="btn-Recording"class="rounded-lg bg-sky-600 hover:bg-sky-800">OBS Recording</button>
             <br>
-            <button id="btn-volume-down"class="btn btn-primary btn-lg">🔉-</button>
-            <button id="btn-previous"class="btn btn-primary btn-lg">|◀◀</button>
-            <button id="btn-play/pause"class="btn btn-primary btn-lg">▶||</button>
-            <button id="btn-next"class="btn btn-primary btn-lg">▶▶|</button>
-            <button id="btn-volume-up"class="btn btn-primary btn-lg">🔊+</button>
-            <button id="btn-volume-mute"class="btn btn-primary btn-lg">🔇</button>
+            <button id="btn-volume-down"class="rounded-lg bg-sky-600 hover:bg-sky-800">🔉-</button>
+            <button id="btn-previous"class="rounded-lg bg-sky-600 hover:bg-sky-800">|◀◀</button>
+            <button id="btn-play/pause"class="rounded-lg bg-sky-600 hover:bg-sky-800">▶||</button>
+            <button id="btn-next"class="rounded-lg bg-sky-600 hover:bg-sky-800">▶▶|</button>
+            <button id="btn-volume-up"class="rounded-lg bg-sky-600 hover:bg-sky-800">🔊+</button>
+            <button id="btn-volume-mute"class="rounded-lg bg-sky-600 hover:bg-sky-800">🔇</button>
 
             <div id="resp"></div>
             <div id="OBSVersion"></div>
@@ -50,8 +50,8 @@
             <button id="buttonDatasend">Enviar</button>
             -->
             <div id="editModeButton">
-                <input type="checkbox" id="toggleCheckboxes" checked>
-                <label for="toggleCheckboxes">Modo Editor </label>
+                <input type="checkbox" id="toggleCheckboxes" class="hidden peer" checked>
+                <label for="toggleCheckboxes" class=" min-w-5 max-w-20 max-h-20 inline-flex items-start pr-4 justify-between text-white bg-sky-200 border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-sky-500 peer-checked:border-blue-600 hover:text-gray-600 peer-checked:bg-red-700 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 dark:text-gray-400 dark:bg-sky-500" >Modo Editor </label>
             <div id="keyboardButtons">
             <div id="keyboardSelect"></div>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#keyboardModal">

@@ -238,7 +238,7 @@ $(document).ready(function() {
 
 // Función para agregar un botón con el botón de borrar asociado al HTML de la modal
 function agregarBotonConX(texto) {
-    const $button = $('<button>', { class: 'button-container', text: texto });
+    const $button = $('<button>', { class: 'rounded-lg bg-sky-500 hover:bg-indigo-700', text: texto });
     
     const $deleteButton = $('<button>', { class: 'delete-button', text: 'X' }); // Botón de borrar
     
