@@ -229,10 +229,13 @@ $(document).ready(function() {
             }
         });
     }
-    buttonExistsParse.forEach(name => {
-        console.log(name);
-        agregarBotonConX(name)
-    })
+    if (buttonExistsParse) {
+        buttonExistsParse.forEach(name => {
+            console.log(name);
+            agregarBotonConX(name)
+        })
+    }
+
 // Función para agregar un botón con el botón de borrar asociado al HTML de la modal
 function agregarBotonConX(texto) {
     const $button = $('<button>', { class: 'button-container', text: texto });
