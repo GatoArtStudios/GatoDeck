@@ -1,28 +1,36 @@
 import json
+import comtypes
 from pycaw.pycaw import AudioUtilities, ISimpleAudioVolume, IAudioMeterInformation
 
 def obtener_programas_con_audio():
     '''
-    Get detailed volume information for all audio sessions.
+    Obtener información detallada del volumen para todas las sesiones de audio.
     
     Returns:
-        list: A list containing dictionaries with detailed information about each audio session.
+        list: Una lista que contiene diccionarios con información detallada sobre cada sesión de audio.
     '''
-    sessions = AudioUtilities.GetAllSessions()
-    audio_sessions_info = []
-    for session in sessions:
-        if session.Process:
-            volume_interface = session._ctl.QueryInterface(ISimpleAudioVolume)
-            meter_interface = session._ctl.QueryInterface(IAudioMeterInformation)
-            session_info = {
-                'Process Name': session.Process.name(),
-                'Volume': volume_interface.GetMasterVolume(),
-                'Mute Status': volume_interface.GetMute(),
-                'Peak Volume': meter_interface.GetPeakValue(),
-                'Session Mute Status': session._ctl.QueryInterface(ISimpleAudioVolume).GetMute(),
-            }
-            audio_sessions_info.append(session_info)
-    return audio_sessions_info
+    comtypes.CoInitialize()  # Inicializar el contexto COM
+    try:
+        sessions = AudioUtilities.GetAllSessions()
+        audio_sessions_info = []
+        for session in sessions:
+            if session.Process:
+                volume_interface = session._ctl.QueryInterface(ISimpleAudioVolume)
+                meter_interface = session._ctl.QueryInterface(IAudioMeterInformation)
+                session_info = {
+                    'Process Name': session.Process.name(),
+                    'Volume': volume_interface.GetMasterVolume(),
+                    'Mute Status': volume_interface.GetMute(),
+                    'Peak Volume': meter_interface.GetPeakValue(),
+                    'Session Mute Status': session._ctl.QueryInterface(ISimpleAudioVolume).GetMute(),
+                }
+                audio_sessions_info.append(session_info)
+            if not audio_sessions_info:
+                
+                print("No se encontraron programas con audio.")
+            return audio_sessions_info
+    finally:
+        comtypes.CoUninitialize()  # Liberar el contexto COM al finalizar
 
 
 def set_audio_volume(process_name, volume):
