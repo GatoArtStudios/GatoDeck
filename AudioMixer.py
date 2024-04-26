@@ -7,10 +7,10 @@ def obtener_programas_con_audio():
     Obtener información detallada del volumen para todas las sesiones de audio.
     
     Returns:
-        list: Una lista que contiene diccionarios con información detallada sobre cada sesión de audio.
+        list: Una lista que contiene diccionarios con información detallada sobre cada sesión de audio, o una lista vacía si no se encuentran programas con audio.
     '''
-    comtypes.CoInitialize()  # Inicializar el contexto COM
     try:
+        comtypes.CoInitialize()  # Inicializar el contexto COM
         sessions = AudioUtilities.GetAllSessions()
         audio_sessions_info = []
         for session in sessions:
@@ -25,13 +25,12 @@ def obtener_programas_con_audio():
                     'Session Mute Status': session._ctl.QueryInterface(ISimpleAudioVolume).GetMute(),
                 }
                 audio_sessions_info.append(session_info)
-            if not audio_sessions_info:
-                
-                print("No se encontraron programas con audio.")
-            return audio_sessions_info
+        return audio_sessions_info
+    except Exception as e:
+        print(f"Error al obtener programas con audio: {e}")
+        return []
     finally:
         comtypes.CoUninitialize()  # Liberar el contexto COM al finalizar
-
 
 def set_audio_volume(process_name, volume):
     '''
