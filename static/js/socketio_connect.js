@@ -105,11 +105,14 @@ socket.on('volumen_actualizado', (data) => {
 // Función para crear un elemento de programa
 function createProgramElement(programa) {
     const programaDiv = document.createElement('div');
+    programaDiv.style.height = "50px"
     volumen = `${programa['Volume']}`
     console.log("volumen",volumen)
+    namep = `${programa['Process Name']}`
+    nameEXE = namep.replace(".exe","")
     programaDiv.innerHTML = `
-        <label for="${programa['Process Name']}" class="flex mb-1 p-2 m-2 text-2xl font-semibold items-center justify-center">${programa['Process Name']}
-        <input type="range" id="${programa['Process Name']}_volumen" name="${programa['Process Name']}_volumen" class="programa-volumen block items-center justify-center self-center align-middle content-center appearance-none w-2/4 rounded-lg h-8 bg-sky-200 cursor-pointer focus:outline-none focus:bg-blue-300 focus:ring focus:border-blue-300" min="0" max="1" step="0.01" value="${programa['Volume']}" onchange="ajustarVolumen('${programa['Process Name']}')"></label>
+        <label for="${namep}" class="flex text-white absolute text-2xl  w-full p-2 font-semibold items-center justify-center">${nameEXE}
+        <input type="range" id="${namep}_volumen" name="${namep}_volumen" class="programa-volume bg-cyan-200/50  absolute appearance-none h-10 max-w-5xl w-9/12 rounded-full cursor-pointer" min="0" max="1" step="0.01" value="${programa['Volume']}" onchange="ajustarVolumen('${namep}')"></label>
     `;
     programaDiv.classList.add('programa-container'); // Agregar una clase al contenedor del programa
     // Agregar clases adicionales si es necesario
