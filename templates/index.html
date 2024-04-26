@@ -24,21 +24,21 @@
         <div id="btn-scenes" class="">
         </div>
         <div class="div-btn">
-            <button id="btn-copy" class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">Copiar</button>
-            <button id="btn-page"class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">Pegar</button>
-            <button id="btn-paper"class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">Paper</button>
-            <button id="btn-mute"class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">Silenciar</button>
-            <button id="btn-ensor"class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">Ensordecer</button>
-            <button id="btn-version"class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">OBS Version</button>
-            <button id="btn-data"class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">OBS data</button>
-            <button id="btn-Recording"class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">OBS Recording</button>
+            <button id="btn-copy" class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">Copiar</button>
+            <button id="btn-page"class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">Pegar</button>
+            <button id="btn-paper"class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">Paper</button>
+            <button id="btn-mute"class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">Silenciar</button>
+            <button id="btn-ensor"class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">Ensordecer</button>
+            <button id="btn-version"class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">OBS Version</button>
+            <button id="btn-data"class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">OBS data</button>
+            <button id="btn-Recording"class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">OBS Recording</button>
             <br>
-            <button id="btn-volume-down"class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">🔉-</button>
-            <button id="btn-previous"class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">|◀◀</button>
-            <button id="btn-play/pause"class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">▶||</button>
-            <button id="btn-next"class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">▶▶|</button>
-            <button id="btn-volume-up"class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">🔊+</button>
-            <button id="btn-volume-mute"class="rounded-lg bg-sky-600 hover:bg-sky-800 m-1">🔇</button>
+            <button id="btn-volume-down"class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">🔉-</button>
+            <button id="btn-previous"class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">|◀◀</button>
+            <button id="btn-play/pause"class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">▶||</button>
+            <button id="btn-next"class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">▶▶|</button>
+            <button id="btn-volume-up"class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">🔊+</button>
+            <button id="btn-volume-mute"class="rounded-lx bg-sky-600 hover:bg-sky-800 m-1">🔇</button>
 
             <div id="resp" ></div>
             <div id="OBSVersion"></div>
@@ -52,24 +52,24 @@
             
             <div id="editModeButton">
                 <input type="checkbox" id="toggleCheckboxes" class="hidden peer" checked>
-                <label for="toggleCheckboxes" class=" min-w-5 max-w-20 max-h-20 inline-flex items-start pr-4 justify-between text-white bg-sky-200 border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-sky-500 peer-checked:border-blue-600 hover:text-gray-900 peer-checked:bg-red-700 dark:peer-checked:text-white peer-checked:text-white dark:text-white dark:bg-sky-500 my-2" >Modo Editor </label>
+                <label for="toggleCheckboxes" class=" min-w-5 max-w-20 max-h-20 inline-flex items-start pr-4 justify-between text-white bg-sky-200 border-2 border-gray-200 rounded-lx cursor-pointer dark:hover:text-gray-300 dark:border-sky-500 peer-checked:border-blue-600 hover:text-gray-900 peer-checked:bg-red-700 dark:peer-checked:text-white peer-checked:text-white dark:text-white dark:bg-sky-500 my-2" >Modo Editor </label>
             <div id="keyboardButtons">
             <div id="keyboardSelect"></div>
-            <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="openModalButton">Añadir atajos</button>
+            <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lx m-2" id="openModalButton">Añadir atajos</button>
 
             <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="keyboardModal">
               <div class="flex items-center justify-center min-h-screen">
-                <div class="bg-transparent w-96 max-w-md p-6 rounded-lg shadow-lg">
+                <div class="bg-transparent w-100 max-w-md p-6 rounded-lx shadow-lg">
                   <div class="flex justify-between items-center mb-4">
-                    <h5 class="text-lg font-semibold bg-purple-600 rounded-lg" id="keyboardModalLabel">Seleccionar teclas</h5>
+                    <h5 class="text-lg font-semibold bg-purple-600 rounded-lx" id="keyboardModalLabel">Seleccionar teclas</h5>
                     <button type="button" class="bg-red-800 w-20 text-white text-xl hover:text-gray-800" id="closeModalButton" aria-label="Close">
                       Cerrar
                     </button>
                   </div>
                   <div id="keyboardListContainer"></div>
-                  <div class="mt-6 flex justify-end">
-                    <button type="button" class="mr-4 py-2 px-4 bg-purple-400-800 hover:bg-gray-300 rounded-md" id="closeModalButton">Cerrar</button>
-                    <button type="button" class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-md" id="saveButton">Guardar</button>
+                  <div class="mt-6 flex justify-center">
+                    <button type="button" class="mr-4 py-2 px-4 bg-purple-400-800 hover:bg-gray-300 rounded-lx m-2" id="closeModalButton">Cerrar</button>
+                    <button type="button" class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lx m-2" id="saveButton">Guardar</button>
                   </div>
                 </div>
               </div>
