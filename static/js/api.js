@@ -219,7 +219,7 @@ $(document).ready(function() {
         Object.entries(KeyboardList).forEach(([keyCode, keyName]) => {
             // Verificar si el elemento ya existe en el localStorage
             if (keyName) {
-                const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-5 px-4 rounded-lg m-2", text: keyName });
+                const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-5 px-4 rounded-lx m-2", text: keyName });
                 $button.on('click', function() {
                     agregarBotonConX($(this).text()); // Agregar el botón junto con el texto al hacer clic en él
                     
@@ -237,7 +237,7 @@ $(document).ready(function() {
 
 // Función para agregar un botón con el botón de borrar asociado al HTML de la modal
 function agregarBotonConX(texto) {
-    const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-5 px-4 rounded-lg m-2", text: texto });
+    const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-5 px-4 rounded-lx m-2", text: texto });
     
     const $deleteButton = $('<button>', { class: 'delete-button', text: 'X' }); // Botón de borrar
     
