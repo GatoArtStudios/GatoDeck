@@ -88,3 +88,55 @@ socket.on('startRecording', function(data) {
 socket.on('action-response', (data) => {
     document.getElementById('resp').innerHTML = data;
 });
+
+socket.on('volumen_actualizado', (data) => {
+    const volumenData = JSON.parse(data);
+    const nombre = volumenData.nombre_proceso;
+    const volumen = volumenData.volumen;
+    console.log("Nombre del proceso:", nombre);
+    console.log("Nuevo volumen:", volumen);
+    
+    // Actualizar el valor del deslizador
+    const volumenInput = document.getElementById(`${nombre}_volumen`);
+    if (volumenInput) {
+        volumenInput.value = volumen;
+    }
+});
+// Función para crear un elemento de programa
+function createProgramElement(programa) {
+    const programaDiv = document.createElement('div');
+    volumen = `${programa['Volume']}`
+    console.log("volumen",volumen)
+    programaDiv.innerHTML = `
+        <label for="${programa['Process Name']}" class="flex mb-1 p-2 m-2 text-2xl font-semibold items-center justify-center">${programa['Process Name']}
+        <input type="range" id="${programa['Process Name']}_volumen" name="${programa['Process Name']}_volumen" class="programa-volumen block items-center justify-center self-center align-middle content-center appearance-none w-2/4 rounded-lg h-8 bg-sky-200 cursor-pointer focus:outline-none focus:bg-blue-300 focus:ring focus:border-blue-300" min="0" max="1" step="0.01" value="${programa['Volume']}" onchange="ajustarVolumen('${programa['Process Name']}')"></label>
+    `;
+    programaDiv.classList.add('programa-container'); // Agregar una clase al contenedor del programa
+    // Agregar clases adicionales si es necesario
+    // programaDiv.classList.add('clase-adicional');
+
+    return programaDiv;
+}
+
+// Función para manejar la lista de programas recibida del servidor
+socket.on('lista_programas', (data) => {
+    const audiodata = JSON.parse(data);
+    console.log(audiodata);
+
+    // Obtener el contenedor de programas
+    const programasContainer = document.getElementById('programasContainer');
+
+    // Limpiar contenedor de programas
+    programasContainer.innerHTML = '';
+
+    // Iterar sobre cada programa y agregarlo al contenedor
+    audiodata.forEach(programa => {
+        const programaDiv = createProgramElement(programa);
+        programasContainer.appendChild(programaDiv);
+    });
+});
+// Función para ajustar el volumen cuando se cambia el deslizador
+function ajustarVolumen(nombre) {
+    const volumen = document.getElementById(`${nombre}_volumen`).value;
+    socket.emit('set_volume', { nombre, volumen });
+}
