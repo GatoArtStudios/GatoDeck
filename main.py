@@ -5,6 +5,7 @@ from api_obs import apiObs
 from AudioMixer import *
 import os
 import time
+import webbrowser
 
 # configuraciones de Flask
 
@@ -25,9 +26,15 @@ def api_back():
 def index():
     return render_template('index.html')
 
+@app.route('/qr')
+def qr():
+    return render_template('qr.html', data = apiBack.qr_data, data2 = apiBack.qr_svg)
+
 @app.errorhandler(404)
 def not_found(error):
     return render_template('error.html'), 404
+
+# Sockets
 
 @socketio.on('socket_data_obs')
 def socket_obs(data):

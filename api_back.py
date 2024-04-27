@@ -1,5 +1,10 @@
 import keyboard
 from api_obs import apiObs
+import socket
+import qrcode
+import qrcode.constants
+import qrcode.image.svg
+import re
 
 class API_BACK:
     def __init__(self) -> None:
@@ -44,6 +49,7 @@ class API_BACK:
             'volume-down': 'volume down',
             'volume-up': 'volume up'
         }
+        self.qr_svg, self.qr_data = self.get_qr_ip()
 
     def action_btn(self, action: str):
         '''
@@ -80,5 +86,39 @@ class API_BACK:
                         print(f"No se pudo simular la tecla '{value}' desde actions2.")
             else:
                 print("No se encontró ninguna tecla similar en actions2.")
+
+    def get_qr_ip(self):
+        '''
+        Obtiene la ip privada y la devuelve en texto plano para SVG
+        '''
+        c = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        try:
+            c.connect(("8.8.8.8", 80))
+            ip_priv = c.getsockname()[0]
+        finally:
+            c.close()
+        url = f'http://{ip_priv}:80/'
+
+        # Genera QR
+
+        q = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+            image_factory=qrcode.image.svg.SvgPathImage
+        )
+        q.add_data(url)
+        q.make(fit=True)
+
+        img_qr = q.make_image(attrib={'class': 'some-css-class'})
+        img = img_qr.to_string(encoding='unicode') # SVG en texto plano
+        # Guarda el QR
+        self.qr_svg = img
+        data = re.search(r'<path d="([^"]*)"', img)
+        if data:
+            a = str(data.groups(1))
+            a = a.replace("('", "").replace("',)", "")
+        return img, a
 
 apiBack = API_BACK()

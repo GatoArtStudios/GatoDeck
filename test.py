@@ -3,6 +3,39 @@ import json
 import keyboard
 import time
 import os
+# Genera QR con ip Privada
+import socket
+import qrcode
+import qrcode.constants
+import qrcode.image.svg
+
+# Consigue ip privada
+
+c = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+try:
+    c.connect(("8.8.8.8", 80))
+    ip_priv = c.getsockname()[0]
+finally:
+    c.close()
+print(ip_priv)
+url = f'http://{ip_priv}:80/'
+
+# Genera QR
+
+q = qrcode.QRCode(
+    version=1,
+    error_correction=qrcode.constants.ERROR_CORRECT_L,
+    box_size=10,
+    border=4,
+    image_factory=qrcode.image.svg.SvgPathImage
+)
+q.add_data(url)
+q.make(fit=True)
+
+img_qr = q.make_image(attrib={'class': 'some-css-class'})
+img = img_qr.to_string(encoding='unicode') # SVG en texto plano
+# Guarda el QR
+print(img)
 
 keylist = {}
 num = 0
