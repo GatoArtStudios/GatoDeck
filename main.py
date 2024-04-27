@@ -87,4 +87,5 @@ def test_button(data):
         apiBack.press(data)
 
 if __name__ == '__main__':
+    webbrowser.open('http://localhost:80/qr')
     socketio.run(app, host='0.0.0.0', port=80, allow_unsafe_werkzeug=True, debug=True)
