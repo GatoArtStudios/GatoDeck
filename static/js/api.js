@@ -186,6 +186,21 @@ const KeyboardList2 = {
     "141": "volume down",
     "142": "volume up"
 };
+function sortKeyboardListsByLengthDescending() {
+    // Convertir los objetos en matrices de pares clave-valor
+    const keyboardListEntries = Object.entries(KeyboardList);
+    const keyboardList2Entries = Object.entries(KeyboardList2);
+
+    // Ordenar las matrices en función de la longitud de los valores en orden descendente
+    keyboardListEntries.sort(([, valueA], [, valueB]) => valueB.length - valueA.length);
+    keyboardList2Entries.sort(([, valueA], [, valueB]) => valueB.length - valueA.length);
+
+    // Reconstruir los objetos ordenados a partir de las matrices ordenadas
+    const sortedKeyboardList = Object.fromEntries(keyboardListEntries);
+    const sortedKeyboardList2 = Object.fromEntries(keyboardList2Entries);
+
+    return { sortedKeyboardList, sortedKeyboardList2 };
+}
 // const buttonElement = document.getElementById('buttonDatasend');
 /*
 buttonElement.addEventListener('click', () => {
@@ -203,144 +218,103 @@ buttonElement.addEventListener('click', () => {
 //const inputElement = document.getElementById('textInput');
 const keyboardButtonsContainer = document.getElementById('keyboardButtons');
 const toggleCheckboxes = document.getElementById('toggleCheckboxes');
-function toggleDeleteButtons() {
-    $('.delete-button:contains("X")').toggle();
-}
+
+let botons;
 $(document).ready(function() {  
-    const buttonExists = localStorage.getItem('botonesGuardados');
-    buttonExistsParse = JSON.parse(buttonExists);
-    console.log(buttonExistsParse);
+    botons = JSON.parse(localStorage.getItem("botons")) || []; // Asignar valor a la variable botons
+
+    const botonesAgregados = new Set();
 
     function cargarListaTeclas() {
         const $container = $('#keyboardListContainer');
         $container.empty(); // Limpiar el contenedor
     
         // Iterar sobre la lista de teclas y agregar elementos con botones
-        Object.entries(KeyboardList).forEach(([keyCode, keyName]) => {
-            // Verificar si el elemento ya existe en el localStorage
-            if (keyName) {
-                const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-5 px-4 rounded-lx m-2", text: keyName });
+        Object.entries(KeyboardList).forEach(([keyCode, nombreBotton]) => {
+            // Verificar si el elemento ya ha sido agregado
+                const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 w-32 text-white font-bold py-5 px-4 rounded-lx m-1", text: nombreBotton });
                 $button.on('click', function() {
-                    agregarBotonConX($(this).text()); // Agregar el botón junto con el texto al hacer clic en él
-                    
+                    createButton(nombreBotton);
                 });
                 $container.append($button);
-            }
+
         });
     }
-    if (buttonExistsParse) {
-        buttonExistsParse.forEach(name => {
-            console.log(name);
-            agregarBotonConX(name)
-        })
-    }
+    cargarListaTeclas()
+    loadButtonsFromLocalStorage();
+  
 
-// Función para agregar un botón con el botón de borrar asociado al HTML de la modal
-function agregarBotonConX(texto) {
-    const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-5 px-4 rounded-lx m-2", text: texto });
+    function saveButtonToLocalStorage(nom, date) {
+        var exists = botons.some(function(button) {
+            return button.nom === nom;
+        });
     
-    const $deleteButton = $('<button>', { class: 'delete-button', text: 'X' }); // Botón de borrar
-    
-    // Agregar listener de evento clic para el botón
-    $button.on('click', function() {
-        const inputValue = texto.trim(); // Mantener el valor original sin convertir a minúsculas
-        const keyboardKeys = Object.values(KeyboardList).map(key => key.toLowerCase()); // Convertir valores a minúsculas para la comparación
-        const lowerCaseInputValue = inputValue.toLowerCase(); // Convertir el valor a minúsculas para la comparación
-        if (keyboardKeys.includes(lowerCaseInputValue)) {
-            socket.emit('TestButton', inputValue); // Enviar el valor original
-            console.log(inputValue);
-        } else {
-            socket.emit('TestButton', inputValue);
-            console.log("no encontro");
+        // Si el botón no existe, añadirlo al array y al localStorage
+        if (!exists) {
+            botons.push({ nom: nom, date: date});
+            localStorage.setItem("botons", JSON.stringify(botons));
         }
-    });
-    
-    // Agregar listener de evento clic para el botón de borrar
-    $deleteButton.on('click', function() {
-        $(this).prev().remove(); // Eliminar el botón
-        $(this).remove(); // Eliminar el botón de borrar asociado
-        // Eliminar el elemento del localStorage
-        const botonesGuardados = JSON.parse(localStorage.getItem('botonesGuardados')) || [];
-        const index = botonesGuardados.indexOf(texto);
-        if (index !== -1) {
-            botonesGuardados.splice(index, 1);
-            localStorage.setItem('botonesGuardados', JSON.stringify(botonesGuardados));
-        }
-    });
-    
-    // Guardar el nombre del botón en el localStorage
-    const botonesGuardados = JSON.parse(localStorage.getItem('botonesGuardados')) || [];
-    if (!botonesGuardados.includes(texto)) {
-        botonesGuardados.push(texto);
-        localStorage.setItem('botonesGuardados', JSON.stringify(botonesGuardados));
     }
-    
-    // Agregar botón y botón de borrar al contenedor
-    keyboardButtonsContainer.appendChild($button[0]);
-    keyboardButtonsContainer.appendChild($deleteButton[0]);
-}
+    function createButton(nombreBotton) {
+        if (nombreBotton && !botonesAgregados.has(nombreBotton)) {
+        var dateCreation = new Date().toLocaleDateString();
+        saveButtonToLocalStorage(nombreBotton, dateCreation);
+        var $botonItem = $(`<div data-nom=' ${nombreBotton} '> <button class='clic-boton' id='text'>${nombreBotton} </button>`);
+        $("#keyboardButtons").append($botonItem);
+        
+            // Agregar el nombre del botón al conjunto de botones agregados
+            botonesAgregados.add(nombreBotton);
+            $botonItem.on('click', function() {
+            const inputValue = nombreBotton
+            //console.log(inputValue)
+            if (!toggleCheckboxes.checked){
+            socket.emit('TestButton', inputValue); // Enviar el valor 
+            }
 
-
-    // Cargar la lista de teclas al cargar la página
-    cargarListaTeclas();
-
-    // Al hacer clic en el botón Guardar
-    $('#saveButton').on('click', function() {
-        // Cerrar la modal
-        $('#keyboardModal').modal('hide');
-    });
-    if (!toggleCheckboxes.checked){$('.delete-button').toggle();}
-    // Al hacer clic en el botón de toggle para ocultar botones de borrar
+        });
+        }
+    }
     $('#toggleCheckboxes').on('click', function() {
-        $('.delete-button').toggle();
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const openModalButton = document.getElementById('openModalButton');
-    const closeModalButtons = document.querySelectorAll('#closeModalButton');
-  
-    // Abrir modal al hacer clic en el botón
-    openModalButton.addEventListener('click', function() {
-      keyboardModal.classList.remove('hidden');
-      document.body.classList.add('overflow-hidden');
-    });
-  
-    // Cerrar modal al hacer clic en el botón de cerrar o fuera del modal
-    closeModalButtons.forEach(function(button) {
-      button.addEventListener('click', function() {
-        keyboardModal.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-      });
-    });
-  
-    keyboardModal.addEventListener('click', function(event) {
-      if (event.target === keyboardModal) {
-        keyboardModal.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-      }
-    });
-  });
-
-function guardarEstadoCheckboxes() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        localStorage.setItem(checkbox.id, checkbox.checked);
-    });
-}
-
-// Función para aplicar el estado guardado de los checkboxes al cargar la página
-function aplicarEstadoCheckboxes() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        const estadoGuardado = localStorage.getItem(checkbox.id);
-        if (estadoGuardado !== null) {
-            checkbox.checked = estadoGuardado === 'true';
+        if (toggleCheckboxes.checked) {
+            $('.clic-boton').addClass('delete-button');
+        } else {
+            $('.clic-boton').removeClass('delete-button');
         }
-        console.log(estadoGuardado);
     });
-}
-
-window.addEventListener('load', aplicarEstadoCheckboxes);
-console.log(KeyboardList);
-window.addEventListener('beforeunload', guardarEstadoCheckboxes);
+    if (toggleCheckboxes.checked) {
+        $('.clic-boton').addClass('delete-button');
+    } else {
+        $('.clic-boton').removeClass('delete-button');
+    }
+    $(document).on('click', '.delete-button', function() {
+        var nomBouton = $(this).closest("div").attr("data-nom").trim(); // Eliminar espacios
+    
+        //console.log("Contenido del array botons:", botons);
+        //console.log("Nombre del botón (nomBouton):", nomBouton);
+    
+        let indexToRemove = botons.findIndex(function(button) {
+            console.log("Nombre del botón en el array:", button.nom); // Verificar nombres
+            return button.nom.trim() === nomBouton; 
+        });
+    
+        //console.log("Índice del elemento a eliminar:", indexToRemove);
+        if (indexToRemove !== -1) {
+            // Eliminar el elemento del array botons
+            botons.splice(indexToRemove, 1);
+            // Actualizar el almacenamiento local
+            localStorage.setItem("botons", JSON.stringify(botons));
+            // Eliminar el botón del DOM
+            $(this).closest("div").remove();
+        }
+    });
+    
+    // Función para cargar los botones desde el almacenamiento local
+    function loadButtonsFromLocalStorage() {
+        console.log(botons);
+        for (var i = 0; i < botons.length; i++) {
+            var boton = botons[i];
+            nombreBottonLoad = boton.nom
+            createButton(nombreBottonLoad)
+        }
+    }
+});
