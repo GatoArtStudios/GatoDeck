@@ -11,6 +11,14 @@
     --color-3: rgb(74, 1, 171);
     --color-4: rgb(46, 2, 104);
     --color-5: rgb(0, 0, 1);
+    --color-6: rgb(2 132 199);
+    --color-7: rgb(0, 148, 223);  
+    --color-8:rgb(47, 158, 214);
+}
+
+.clic-boton {
+  background-color: var(--color-8); 
+  margin: 0.5rem;
 }
 body {
     background-color: var(--color-4);
@@ -20,7 +28,7 @@ body {
 }
 button {
     color: var(--color-ligth-gris);
-    background-color: var(--color-2);
+    background-color: var(--color-6);
     border-radius: 17px;
     padding: 10px;
     font-size: 2rem;
@@ -37,10 +45,8 @@ button {
     color: var(--color-text);
 }
 .delete-button {
-    position: relative;
     background-color: red;
     height: 45px;
-    width: 45px;
 }
 button:hover {
     color: var(--color-1);
@@ -87,7 +93,6 @@ button:hover {
   }
   
   .modal-content {
-    background-color: #fff; /* White content */
     margin: 15px; /* Add some margin */
     padding: 20px;
     border: 1px solid #888; /* 1px grey border */
