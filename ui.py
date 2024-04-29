@@ -14,7 +14,7 @@ class UI:
         self.__page.title = 'GatoDeck'
         self.__page.padding = 0
         self.__page.theme_mode = ft.ThemeMode.DARK
-        self.__page.window_title_bar_hidden = False
+        self.__page.window_title_bar_hidden = True
         self.__page.window_bgcolor = ft.colors.TRANSPARENT
         self.__page.vertical_alignment = ft.MainAxisAlignment.CENTER
         self.__page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
