@@ -107,7 +107,8 @@ class API_BACK:
         #     ip_priv = c.getsockname()[0]
         # finally:
         #     c.close()
-        url = f'http://{self.get_ip}:80/'
+        
+        url = f'http://{self.get_ip()}:80/'
 
         # Genera QR
 
