@@ -2,6 +2,7 @@ from typing import Any
 import flet as ft
 import webbrowser
 import time
+from api_back import apiBack
 
 class UI:
     def __init__(self, ip: str) -> None:
@@ -80,7 +81,8 @@ class UI:
             e.control.bgcolor = 'white'
             e.control.update()
 
-def run_ui(ip):
+if __name__ == '__main__':
+    ip = apiBack.get_ip()
     ui = UI(ip)
     time.sleep(3)
     ft.app(target=ui)

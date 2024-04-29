@@ -3,12 +3,12 @@ from flask_socketio import SocketIO, send, emit
 from api_back import apiBack
 from api_obs import apiObs
 from AudioMixer import *
-from ui import run_ui
 import os
 import concurrent.futures
 import time
 import webbrowser
 import threading
+import subprocess
 
 # configuraciones de Flask
 
@@ -89,19 +89,6 @@ def socket_obs(data):
 def test_button(data):
         apiBack.press(data)
 
-def main():
-    ip = apiBack.get_ip()
-
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        ui = executor.submit(run_ui, ip)
-        socketio.run(app, host='0.0.0.0', port=80, allow_unsafe_werkzeug=False, debug=False)
-        ui.result()
-
 if __name__ == '__main__':
-    main()
-
-
-# if __name__ == '__main__':
-#     ui = threading.Thread(target=run_ui(apiBack.get_ip())) # run_ui() corre flet
-#     ui.start()
-#     socketio.run(app, host='0.0.0.0', port=80, allow_unsafe_werkzeug=False, debug=False)
+    subprocess.run('start /b python ui.py', shell=True)
+    socketio.run(app, host='0.0.0.0', port=80, allow_unsafe_werkzeug=False, debug=False)
