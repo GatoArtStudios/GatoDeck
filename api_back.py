@@ -49,6 +49,7 @@ class API_BACK:
             'volume-down': 'volume down',
             'volume-up': 'volume up'
         }
+        self.qr_activo = False
         self.qr_svg, self.qr_data = self.get_qr_ip()
 
     def action_btn(self, action: str):
@@ -87,17 +88,26 @@ class API_BACK:
             else:
                 print("No se encontró ninguna tecla similar en actions2.")
 
-    def get_qr_ip(self):
-        '''
-        Obtiene la ip privada y la devuelve en texto plano para SVG
-        '''
+    def get_ip(self):
         c = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         try:
             c.connect(("8.8.8.8", 80))
             ip_priv = c.getsockname()[0]
         finally:
             c.close()
-        url = f'http://{ip_priv}:80/'
+        return ip_priv
+
+    def get_qr_ip(self):
+        '''
+        Obtiene la ip privada y la devuelve en texto plano para SVG
+        '''
+        # c = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        # try:
+        #     c.connect(("8.8.8.8", 80))
+        #     ip_priv = c.getsockname()[0]
+        # finally:
+        #     c.close()
+        url = f'http://{self.get_ip}:80/'
 
         # Genera QR
 
@@ -110,15 +120,28 @@ class API_BACK:
         )
         q.add_data(url)
         q.make(fit=True)
-
+        # Guardar png
+        png = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        png.add_data(url)
+        png.make(fit=True)
+        png = png.make_image(fill_color="black", back_color="white")
+        png.save(f'static/qr.png')
+        # Guarda SVG
         img_qr = q.make_image(attrib={'class': 'some-css-class'})
         img = img_qr.to_string(encoding='unicode') # SVG en texto plano
         # Guarda el QR
         self.qr_svg = img
         data = re.search(r'<path d="([^"]*)"', img)
-        if data:
+        if data and self.qr_activo == False:
             a = str(data.groups(1))
             a = a.replace("('", "").replace("',)", "")
+            print(self.qr_activo)
+            self.qr_activo = True
         return img, a
 
 apiBack = API_BACK()
