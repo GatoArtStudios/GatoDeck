@@ -3,12 +3,13 @@ from flask_socketio import SocketIO, send, emit
 from api_back import apiBack
 from api_obs import apiObs
 from AudioMixer import *
-from ui import run_ui
 import os
 import concurrent.futures
 import time
 import webbrowser
 import threading
+import subprocess
+from ui import run_ui
 
 # configuraciones de Flask
 
