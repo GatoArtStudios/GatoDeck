@@ -81,8 +81,7 @@ class UI:
             e.control.bgcolor = 'white'
             e.control.update()
 
-if __name__ == '__main__':
-    ip = apiBack.get_ip()
+def run_ui(ip):
     ui = UI(ip)
     time.sleep(3)
     ft.app(target=ui)

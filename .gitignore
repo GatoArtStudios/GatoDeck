@@ -152,3 +152,4 @@ cython_debug/
 #.idea/
 templates/index (2).html
 static/qr.png
+static/qr.png
