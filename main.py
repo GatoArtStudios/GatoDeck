@@ -9,6 +9,7 @@ import time
 import webbrowser
 import threading
 import subprocess
+from ui import run_ui
 
 # configuraciones de Flask
 
@@ -84,11 +85,29 @@ def socket_obs(data):
 @socketio.on('action')
 def socket_obs(data):
     emit('action-response', apiBack.action_btn(data))
-
 @socketio.on('TestButton')
 def test_button(data):
         apiBack.press(data)
 
+def flask_thread_function():
+    socketio.run(app, host='0.0.0.0', port=80, allow_unsafe_werkzeug=True, debug=False)
+
+def main():
+    ip = apiBack.get_ip()
+
+    # Iniciar el hilo de Flask
+    flask_thread = threading.Thread(target=flask_thread_function)
+    flask_thread.start()
+
+    # Ejecutar el otro proceso (run_ui)
+    run_ui(ip)
+
+    # Esperar a que Flask termine
+    flask_thread.join()
+
 if __name__ == '__main__':
-    subprocess.run('start /b python ui.py', shell=True)
-    socketio.run(app, host='0.0.0.0', port=80, allow_unsafe_werkzeug=False, debug=False)
+    main()
+# if __name__ == '__main__':
+#     ui = threading.Thread(target=run_ui(apiBack.get_ip())) # run_ui() corre flet
+#     ui.start()
+#     socketio.run(app, host='0.0.0.0', port=80, allow_unsafe_werkzeug=False, debug=False)
