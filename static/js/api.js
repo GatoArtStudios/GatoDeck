@@ -272,6 +272,11 @@ $(document).ready(function() {
             }
 
         });
+        if (toggleCheckboxes.checked) {
+            $('.clic-boton').addClass('delete-button');
+        } else {
+            $('.clic-boton').removeClass('delete-button');
+        }
         }
     }
     $('#toggleCheckboxes').on('click', function() {
@@ -281,11 +286,7 @@ $(document).ready(function() {
             $('.clic-boton').removeClass('delete-button');
         }
     });
-    if (toggleCheckboxes.checked) {
-        $('.clic-boton').addClass('delete-button');
-    } else {
-        $('.clic-boton').removeClass('delete-button');
-    }
+
     $(document).on('click', '.delete-button', function() {
         var nomBouton = $(this).closest("div").attr("data-nom").trim(); // Eliminar espacios
     
@@ -296,7 +297,7 @@ $(document).ready(function() {
             console.log("Nombre del botón en el array:", button.nom); // Verificar nombres
             return button.nom.trim() === nomBouton; 
         });
-    
+        botonesAgregados.delete(nomBouton);
         //console.log("Índice del elemento a eliminar:", indexToRemove);
         if (indexToRemove !== -1) {
             // Eliminar el elemento del array botons
