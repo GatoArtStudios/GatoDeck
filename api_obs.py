@@ -5,12 +5,18 @@ import json
 class API_OBS:
     def __init__(self) -> None:
         self.connection = False
+        self.client = None
+
+    def connect_to_obs(self, host: str, port: int, password: str) -> None:
+        """
+        Connect to OBS using the provided host, port, and password.
+        """
         try:
-            self.client = obsws(host='localhost', port=4455, password='123456')
+            self.client = obsws(host=host, port=port, password=password)
             self.client.connect()
             self.connection = True
         except Exception as e:
-            print('Error al conectar')
+            print('Error al conectar a OBS:', e)
 
     def get_version(self):
         data = self.client.call(requests.GetVersion())
@@ -166,3 +172,4 @@ class API_OBS:
             self.client.call(requests.ToggleRecordPause())
 
 apiObs = API_OBS()
+

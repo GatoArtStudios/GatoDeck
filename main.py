@@ -38,7 +38,14 @@ def qr():
 def not_found(error):
     return render_template('error.html'), 404
 
-# Sockets
+@socketio.on('obs_connect')
+def connect_obs(data):
+    localhost = data['localhost']
+    port = data['port']
+    password = data['password']
+    apiObs.connect_to_obs(localhost, port, password)
+    socketio.emit('data-obs_connect', data)
+    socket_obs()
 
 @socketio.on('socket_data_obs')
 def socket_obs(data):
