@@ -22,7 +22,7 @@ async function handleAction(action) {
 
 // Checa la conexion con el socket
 socket.on('connect', function (data) {
-    console.log(data);
+    //console.log(data);
     console.log('Conectado con el socket');
     socket.emit('socket_data_obs',{data: 'Conexion preparada y lista para usar'})
 });
@@ -121,11 +121,27 @@ function createProgramElement(programa) {
     return programaDiv;
 }
 
+socket.on('data-obs_connect', (data) => {
+    console.log("data-obs_connect",data);
+    dataconnect = {
+
+    }
+});
+document.getElementById('obsForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const formData = new FormData(this);
+    const localhost = formData.get('localhost');
+    const port = formData.get('port');
+    const password = formData.get('password');
+
+    // Envía los datos al servidor a través de Socket.IO
+    socket.emit('obs_connect', { localhost, port, password });
+});
 // Función para manejar la lista de programas recibida del servidor
 socket.on('lista_programas', (data) => {
     const audiodata = JSON.parse(data);
     console.log(audiodata);
-
     // Obtener el contenedor de programas
     const programasContainer = document.getElementById('programasContainer');
 
