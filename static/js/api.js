@@ -180,7 +180,8 @@ const KeyboardList = {
     162: '"',
     163: '<',
     164: '>',
-    165: '?'
+    165: '?',
+    166: 'win'
   };
 
 function sortKeyboardListsByLengthDescending() {
@@ -228,17 +229,27 @@ $(document).ready(function() {
     
         const searchContainer = $('<div>', { class: "flex items-center justify-center border-b border-b-2 border-blue-500 py-2" });
         const searchInput = $('<input>', { class: "flex bg-black/25 w-2/4 justify-center", type: "text", placeholder: "Buscar..." });
-    
+        const buttonCreate = $('<div>', { class: "flex items-center bg-gray-500 justify-center border-b border-b-2 border-blue-500 py-2" });
         searchContainer.append(searchInput);
         $container.append(searchContainer);
-    
+        $container.append(buttonCreate)
+        let buttonCount = 0;
+        function limpiarBotones() {
+            buttonCreate.children().not(sendButton).not(clearButton).remove(); // Limpiar buttonCreate excluyendo sendButton
+            buttonCount = 0; // Restablecer el contador
+        }
         // Iterar sobre la lista de teclas y agregar elementos con botones
         Object.entries(KeyboardList).forEach(([keyCode, nombreBotton]) => {
+            var $botonItem = $(`<div data-nom=' ${nombreBotton} '> <button class='clic-boton' id='text'>${nombreBotton} </button>`);
+
             // Verificar si el elemento ya ha sido agregado
             const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md m-1", text: nombreBotton });
     
             $button.on('click', function() {
-                createButton(nombreBotton);
+                //createButton(nombreBotton);
+                searchContainer.append($botonItem);
+                buttonCreate.append($botonItem);
+                buttonCount++; // Incrementar el contador de botones agregados
             });
     
             // Agregar el botón al contenedor solo si coincide con el término de búsqueda
@@ -249,26 +260,53 @@ $(document).ready(function() {
     
         // Agregar un listener para el evento 'input' en el campo de búsqueda
         searchInput.on('input', function() {
+
             const searchTerm = searchInput.val().toLowerCase();
     
             // Limpiar el contenedor de botones
-            $container.children().not(searchContainer).remove();
+            $container.children().not(searchContainer).not(buttonCreate).remove();
     
             // Iterar sobre la lista de teclas y agregar elementos con botones
             Object.entries(KeyboardList).forEach(([keyCode, nombreBotton]) => {
+                var $botonItem = $(`<div data-nom=' ${nombreBotton} '> <button class='clic-boton' id='text'>${nombreBotton} </button>`);
+
                 // Verificar si el elemento ya ha sido agregado
                 if (nombreBotton.toLowerCase().includes(searchTerm)) {
                     const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md m-1", text: nombreBotton });
     
                     $button.on('click', function() {
-                        createButton(nombreBotton);
+                        //createButton(nombreBotton);
+                        buttonCreate.append($botonItem);
+                        buttonCount++; // Incrementar el contador de botones agregados
                     });
     
                     $container.append($button);
                 }
             });
         });
-
+        const sendButton = $('<button>', { class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md m-1", text: "Crear Boton" });
+        buttonCreate.append(sendButton);
+        const clearButton = $('<button>', { class: "bg-red-500 hover:bg-red-700 w-12 font-bold rounded-md", text: "x" });
+        buttonCreate.append(clearButton);
+        buttonCreate.on('click', function() {limpiarBotones()})
+        // Agregar el listener para el evento 'click' en el botón de enviar
+        sendButton.on('click', function() {
+            // Array para almacenar los valores de los botones
+            const valoresBotones = [];
+    
+            // Obtener todos los botones agregados dentro de buttonCreate y agregar sus valores al array
+            buttonCreate.find('.clic-boton').each(function() {
+                const value = $(this).text().trim();
+                valoresBotones.push(value);
+            });
+            newButtonValue = valoresBotones.join('+')
+            console.log(valoresBotones.join('+'));
+            //CREARCOMBINACION DE BOTON 
+            createButton(newButtonValue)
+            // Imprimir todos los valores en un solo console.log
+    
+            limpiarBotones();
+        });
     }
     
     
