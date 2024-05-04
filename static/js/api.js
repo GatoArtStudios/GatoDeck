@@ -15,177 +15,175 @@ document.getElementById('btn-next').addEventListener('click', () => handleAction
 document.getElementById('btn-volume-down').addEventListener('click', () => handleAction('volume-down'));
 document.getElementById('btn-volume-mute').addEventListener('click', () => handleAction('volume-mute'));
 
-const KeyboardList = {     
-  3: 'Break', 
-    8: 'Backspace',    9: 'Tab',    12: 'Clear',    13: 'Enter',    16: 'Shift',    17: 'Control',    
-    18: 'Alt',    19: 'Pause/Break',    20: 'CapsLock',    21: 'Hangul', 
-   27: 'Escape',    28: 'Conversion',    29: 'Non-conversion',  
-  33: 'PageUp',    34: 'PageDown',    35: 'End',    36: 'Home',    
-    37: '←',    38: '↑',    39: '→',    40: '↓',    41: 'Select',    42: 'Print',    43: 'Execute',    
-    44: 'PrintScreen',    45: 'Insert',    46: 'Delete',    47: 'Help',    48: '0',    49: '1',    
-    50: '2',    51: '3',    52: '4',    53: '5',    54: '6',    55: '7',    56: '8',    57: '9',    
-    65: 'A',    66: 'B',    67: 'C',    68: 'D',    69: 'E',    70: 'F',    71: 'G',    72: 'H',    
-    73: 'I',    74: 'J',    75: 'K',    76: 'L',    77: 'M',    78: 'N',    79: 'O',    80: 'P',    
-    81: 'Q',    82: 'R',    83: 'S',    84: 'T',    85: 'U',    86: 'V',    87: 'W',    88: 'X',    
-    89: 'Y',    90: 'Z',     93: 'Windows Menu',    95: 'sleep',     
-    112: 'F1',    113: 'F2',    114: 'F3',    115: 'F4',    116: 'F5',    117: 'F6',    118: 'F7',    
-    119: 'F8',    120: 'F9',    121: 'F10',    122: 'F11',    123: 'F12',    124: 'F13',    
-    125: 'F14',    126: 'F15',    127: 'F16',    128: 'F17',    129: 'F18',    130: 'F19',    
-    131: 'F20',    132: 'F21',    133: 'F22',    134: 'F23',    135: 'F24',    144: 'Numlock',    
-    145: 'Scrolllock',    160: ' Shift',    161: 'Shift',    162: ' Ctrl',    
-    163: 'Ctrl',    164: ' Alt',    165: 'Alt',    166: 'Browser Back',    
-    167: 'Browser Forward',    168: 'Browser Refresh',    169: 'Browser Stop',    170: 'Browser Search',    
-    171: 'Browser Favorites',    172: 'Browser Home',    173: 'Volume Mute',    174: 'Volume Down',    
-    175: 'Volume Up',    176: 'Next Track',    177: 'Previous Track',    178: 'Stop Media',    
-    179: 'Play/Pause',    180: 'Start Mail',    181: 'Select Media',    182: 'Start App 1',    
-    183: 'Start App 2',    186: ';',    187: '=',    188: ',',    189: '-',    190: '.',    191: '/', 192: 'up', 193: 'left',
-    194: 'down',195: 'menu',196: 'right',
-}
-const KeyboardList2 = {
-    "0": "esc",
-    "1": "f1",
-    "2": "f2",
-    "3": "f3",
-    "4": "f4",
-    "5": "f5",
-    "6": "f6",
-    "7": "f7",
-    "8": "f8",
-    "9": "f9",
-    "10": "f10",
-    "11": "f11",
-    "12": "f12",
-    "13": "1",
-    "14": "2",
-    "15": "3",
-    "16": "4",
-    "17": "5",
-    "18": "6",
-    "19": "7",
-    "20": "8",
-    "21": "9",
-    "22": "0",
-    "23": "`",
-    "24": "shift",
-    "25": "~",
-    "26": "!",
-    "27": "@",
-    "28": "#",
-    "29": "$",
-    "30": "%",
-    "31": "^",
-    "32": "&",
-    "33": "*",
-    "34": "(",
-    "35": ")",
-    "36": "_",
-    "37": "+",
-    "38": "-",
-    "39": "=",
-    "40": "tab",
-    "41": "[",
-    "42": "]",
-    "43": "\\",
-    "44": "{",
-    "45": "}",
-    "46": "|",
-    "47": ";",
-    "48": "'",
-    "49": ":",
-    "50": "\"",
-    "51": ",",
-    "52": ".",
-    "53": "/",
-    "54": "<",
-    "55": ">",
-    "56": "?",
-    "57": "right shift",
-    "58": "enter",
-    "59": "right ctrl",
-    "60": "menu",
-    "61": "right alt",
-    "62": "alt",
-    "63": "ctrl",
-    "64": "left windows",
-    "65": "caps lock",
-    "66": "left",
-    "67": "down",
-    "68": "right",
-    "69": "up",
-    "70": "delete",
-    "71": "end",
-    "72": "page down",
-    "73": "page up",
-    "74": "home",
-    "75": "insert",
-    "76": "print screen",
-    "77": "scroll lock",
-    "78": "pause",
-    "79": "s",
-    "80": "q",
-    "81": "w",
-    "82": "e",
-    "83": "r",
-    "84": "t",
-    "85": "y",
-    "86": "u",
-    "87": "i",
-    "88": "o",
-    "89": "p",
-    "90": "l",
-    "91": "k",
-    "92": "j",
-    "93": "h",
-    "94": "g",
-    "95": "f",
-    "96": "d",
-    "97": "a",
-    "98": "z",
-    "99": "x",
-    "100": "c",
-    "101": "v",
-    "102": "b",
-    "103": "n",
-    "104": "m",
-    "105": "space",
-    "106": "Q",
-    "107": "W",
-    "108": "E",
-    "109": "R",
-    "110": "T",
-    "111": "Y",
-    "112": "U",
-    "113": "I",
-    "114": "O",
-    "115": "P",
-    "116": "L",
-    "117": "K",
-    "118": "J",
-    "119": "H",
-    "120": "G",
-    "121": "F",
-    "122": "D",
-    "123": "S",
-    "124": "A",
-    "125": "Z",
-    "126": "X",
-    "127": "C",
-    "128": "V",
-    "129": "B",
-    "130": "N",
-    "131": "M",
-    "132": "start application 1",
-    "133": "browser search key",
-    "134": "start application 2",
-    "135": "select media",
-    "136": "previous track",
-    "137": "next track",
-    "138": "play/pause media",
-    "139": "stop media",
-    "140": "volume mute",
-    "141": "volume down",
-    "142": "volume up"
-};
+const KeyboardList = {
+    1: 'start application 1',
+    2: 'start application 2',
+    3: 'Browser Back',
+    4: 'Browser Forward',
+    5: 'Browser Refresh',
+    6: 'Browser Stop',
+    7: 'Browser Search',
+    8: 'Browser Favorites',
+    9: 'Browser Home',
+    10: 'play/pause media',
+    11: 'Start Mail',
+    12: 'Select Media',
+    13: 'Start App 1',
+    14: 'Start App 2',
+    15: 'browser search key',
+    16: 'Windows Menu',
+    17: 'select media',
+    18: 'previous track',
+    19: 'next track',
+    20: 'stop media',
+    21: 'right shift',
+    22: 'right ctrl',
+    23: 'right alt',
+    24: 'left windows',
+    25: 'caps lock',
+    26: 'Stop Media',
+    27: 'Play/Pause',
+    28: 'play/pause',
+    29: 'Hangul',
+    30: 'Conversion',
+    31: 'Non-conversion',
+    32: 'Pause/Break',
+    33: 'sleep',
+    34: 'Volume Mute',
+    35: 'Volume Down',
+    36: 'Volume Up',
+    37: 'Next Track',
+    38: 'Previous Track',
+    39: 'volume down',
+    40: 'volume up',
+    41: 'Break',
+    42: 'Backspace',
+    43: 'Tab',
+    44: 'Clear',
+    45: 'Enter',
+    46: 'Shift',
+    47: 'Control',
+    48: 'Alt',
+    49: 'CapsLock',
+    50: 'Escape',
+    51: 'PageUp',
+    52: 'PageDown',
+    53: 'End',
+    54: 'Home',
+    55: 'Select',
+    56: 'Print',
+    57: 'Execute',
+    58: 'PrintScreen',
+    59: 'Insert',
+    60: 'Delete',
+    61: 'Help',
+    62: 'F1',
+    63: 'F2',
+    64: 'F3',
+    65: 'F4',
+    66: 'F5',
+    67: 'F6',
+    68: 'F7',
+    69: 'F8',
+    70: 'F9',
+    71: 'F10',
+    72: 'F11',
+    73: 'F12',
+    74: 'F13',
+    75: 'F14',
+    76: 'F15',
+    77: 'F16',
+    78: 'F17',
+    79: 'F18',
+    80: 'F19',
+    81: 'F20',
+    82: 'F21',
+    83: 'F22',
+    84: 'F23',
+    85: 'F24',
+    86: 'Numlock',
+    87: 'Scrolllock',
+    88: 'up',
+    89: 'left',
+    90: 'down',
+    91: 'menu',
+    92: 'right',
+    93: 'A',
+    94: 'B',
+    95: 'C',
+    96: 'D',
+    97: 'E',
+    98: 'F',
+    99: 'G',
+    100: 'H',
+    101: 'I',
+    102: 'J',
+    103: 'K',
+    104: 'L',
+    105: 'M',
+    106: 'N',
+    107: 'O',
+    108: 'P',
+    109: 'Q',
+    110: 'R',
+    111: 'S',
+    112: 'T',
+    113: 'U',
+    114: 'V',
+    115: 'W',
+    116: 'X',
+    117: 'Y',
+    118: 'Z',
+    119: '0',
+    120: '1',
+    121: '2',
+    122: '3',
+    123: '4',
+    124: '5',
+    125: '6',
+    126: '7',
+    127: '8',
+    128: '9',
+    129: '←',
+    130: '↑',
+    131: '→',
+    132: '↓',
+    133: ';',
+    134: '=',
+    135: ',',
+    136: '-',
+    137: '.',
+    138: '/',
+    139: 'esc',
+    140: '`',
+    141: '~',
+    142: '!',
+    143: '@',
+    144: '#',
+    145: '$',
+    146: '%',
+    147: '^',
+    148: '&',
+    149: '*',
+    150: '(',
+    151: ')',
+    152: '_',
+    153: '+',
+    154: 'tab',
+    155: '[',
+    156: ']',
+    157: '\\',
+    158: '{',
+    159: '}',
+    160: '|',
+    161: ':',
+    162: '"',
+    163: '<',
+    164: '>',
+    165: '?',
+    166: 'win'
+  };
+
 function sortKeyboardListsByLengthDescending() {
     // Convertir los objetos en matrices de pares clave-valor
     const keyboardListEntries = Object.entries(KeyboardList);
@@ -229,17 +227,89 @@ $(document).ready(function() {
         const $container = $('#keyboardListContainer');
         $container.empty(); // Limpiar el contenedor
     
+        const searchContainer = $('<div>', { class: "flex items-center justify-center border-b border-b-2 border-blue-500 py-2" });
+        const searchInput = $('<input>', { class: "flex bg-black/25 w-2/4 justify-center", type: "text", placeholder: "Buscar..." });
+        const buttonCreate = $('<div>', { class: "flex items-center bg-gray-500 justify-center border-b border-b-2 border-blue-500 py-2" });
+        searchContainer.append(searchInput);
+        $container.append(searchContainer);
+        $container.append(buttonCreate)
+        let buttonCount = 0;
+        function limpiarBotones() {
+            buttonCreate.children().not(sendButton).not(clearButton).remove(); // Limpiar buttonCreate excluyendo sendButton
+            buttonCount = 0; // Restablecer el contador
+        }
         // Iterar sobre la lista de teclas y agregar elementos con botones
         Object.entries(KeyboardList).forEach(([keyCode, nombreBotton]) => {
-            // Verificar si el elemento ya ha sido agregado
-                const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 w-32 text-white font-bold py-5 px-4 rounded-lx m-1", text: nombreBotton });
-                $button.on('click', function() {
-                    createButton(nombreBotton);
-                });
-                $container.append($button);
+            var $botonItem = $(`<div data-nom=' ${nombreBotton} '> <button class='clic-boton' id='text'>${nombreBotton} </button>`);
 
+            // Verificar si el elemento ya ha sido agregado
+            const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md m-1", text: nombreBotton });
+    
+            $button.on('click', function() {
+                //createButton(nombreBotton);
+                searchContainer.append($botonItem);
+                buttonCreate.append($botonItem);
+                buttonCount++; // Incrementar el contador de botones agregados
+            });
+    
+            // Agregar el botón al contenedor solo si coincide con el término de búsqueda
+            if (nombreBotton.toLowerCase().includes(searchInput.val().toLowerCase())) {
+                $container.append($button);
+            }
+        });
+    
+        // Agregar un listener para el evento 'input' en el campo de búsqueda
+        searchInput.on('input', function() {
+
+            const searchTerm = searchInput.val().toLowerCase();
+    
+            // Limpiar el contenedor de botones
+            $container.children().not(searchContainer).not(buttonCreate).remove();
+    
+            // Iterar sobre la lista de teclas y agregar elementos con botones
+            Object.entries(KeyboardList).forEach(([keyCode, nombreBotton]) => {
+                var $botonItem = $(`<div data-nom=' ${nombreBotton} '> <button class='clic-boton' id='text'>${nombreBotton} </button>`);
+
+                // Verificar si el elemento ya ha sido agregado
+                if (nombreBotton.toLowerCase().includes(searchTerm)) {
+                    const $button = $('<button>', { class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md m-1", text: nombreBotton });
+    
+                    $button.on('click', function() {
+                        //createButton(nombreBotton);
+                        buttonCreate.append($botonItem);
+                        buttonCount++; // Incrementar el contador de botones agregados
+                    });
+    
+                    $container.append($button);
+                }
+            });
+        });
+        const sendButton = $('<button>', { class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md m-1", text: "Crear Boton" });
+        buttonCreate.append(sendButton);
+        const clearButton = $('<button>', { class: "bg-red-500 hover:bg-red-700 w-12 font-bold rounded-md", text: "x" });
+        buttonCreate.append(clearButton);
+        buttonCreate.on('click', function() {limpiarBotones()})
+        // Agregar el listener para el evento 'click' en el botón de enviar
+        sendButton.on('click', function() {
+            // Array para almacenar los valores de los botones
+            const valoresBotones = [];
+    
+            // Obtener todos los botones agregados dentro de buttonCreate y agregar sus valores al array
+            buttonCreate.find('.clic-boton').each(function() {
+                const value = $(this).text().trim();
+                valoresBotones.push(value);
+            });
+            newButtonValue = valoresBotones.join('+')
+            console.log(valoresBotones.join('+'));
+            //CREARCOMBINACION DE BOTON 
+            createButton(newButtonValue)
+            // Imprimir todos los valores en un solo console.log
+    
+            limpiarBotones();
         });
     }
+    
+    
     cargarListaTeclas()
     loadButtonsFromLocalStorage();
   
