@@ -1,25 +1,21 @@
-from obswebsocket import obsws, requests
+from obswebsocket import obsws, requests, events
 import asyncio
 import json
 
 class API_OBS:
-    def __init__(self) -> None:
-        self.connection = False
-        self.client = None
+    def __init__(self):
+        self.ws = None
 
-    def connect_to_obs(self, host: str, port: int, password: str) -> None:
-        """
-        Connect to OBS using the provided host, port, and password.
-        """
+    def connect_to_obs(self, localhost, port, password):
         try:
-            self.client = obsws(host=host, port=port, password=password)
-            self.client.connect()
-            self.connection = True
+            self.ws = obsws(localhost, port, password)
+            self.ws.connect()
+            print("Connected to obs")
         except Exception as e:
-            print('Error al conectar a OBS:', e)
+            print("Error:", e)
 
     def get_version(self):
-        data = self.client.call(requests.GetVersion())
+        data = self.ws.call(requests.GetVersion())
         myJson = {
             'name': data.name,
             'availableRequests': data.datain['availableRequests'],
@@ -33,12 +29,12 @@ class API_OBS:
         return myJson
 
     def get_scene_list(self):
-        esceneversion = self.client.call(requests.GetSceneList())
+        esceneversion = self.ws.call(requests.GetSceneList())
 
         return esceneversion
 
     def get_GetStats(self):
-        dataStats = self.client.call(requests.GetStats())
+        dataStats = self.ws.call(requests.GetStats())
         myJson2 = {
                 'name': dataStats.name,
                 'activeFps': dataStats.datain['activeFps'],
@@ -90,11 +86,11 @@ class API_OBS:
         '''
         if self.connection == False:
             try:
-                self.client.reconnect()
+                self.ws.reconnect()
             except Exception as e:
                 return f'Hubo un error: {e}'
         if self.connection:
-            return f'Version actual: {self.client.call(requests.GetVersion()).getObsVersion()}'
+            return f'Version actual: {self.ws.call(requests.GetVersion()).getObsVersion()}'
         else:
             return 'Desconectado de obs | Soporte para Api V5'
 
@@ -107,13 +103,13 @@ class API_OBS:
         '''
         if self.connection == False:
             try:
-                self.client.reconnect()
+                self.ws.reconnect()
             except Exception as e:
                 return 'Error al obtener la lista de escenas'
         if self.connection:
             # Obtener la losta de escenas
             try:
-                scenes = self.client.call(requests.GetSceneList())
+                scenes = self.ws.call(requests.GetSceneList())
                 # print(vars(scenes))
                 print(type(scenes))
                 print(f"Escena actual: {scenes.datain['currentProgramSceneName']},\nLista de escenas: {scenes.datain['scenes']},\n Estatus: {scenes.status}")
@@ -126,7 +122,7 @@ class API_OBS:
         '''
         Hay que pasarle el nombre de la escena a usar.
         '''
-        self.client.call(requests.SetCurrentProgramScene(sceneName=name))
+        self.ws.call(requests.SetCurrentProgramScene(sceneName=name))
         print(f'Ejecutando funcion de cambiar escena {name}')
 
     def stream(self, action: str):
@@ -143,10 +139,10 @@ class API_OBS:
         ```
         '''
         if action == 'stream-on':
-            self.client.call(requests.StartStream())
+            self.ws.call(requests.StartStream())
             return f'Accion: {action}'
         elif action == 'stream-off':
-            self.client.call(requests.StopStream())
+            self.ws.call(requests.StopStream())
             return f'Accion: {action}'
 
     def record(self, action: str):
@@ -163,13 +159,12 @@ class API_OBS:
         ```
         '''
         if action == 'record-on':
-            self.client.call(requests.StartRecord())
+            self.ws.call(requests.StartRecording())
             return f'Accion: {action}'
         elif action == 'record-off':
-            self.client.call(requests.StopRecord())
+            self.ws.call(requests.StopRecording())
             return f'Accion: {action}'
         elif action == 'record-toggle-pause':
-            self.client.call(requests.ToggleRecordPause())
+            self.ws.call(requests.ToggleRecordPause())
 
 apiObs = API_OBS()
-
