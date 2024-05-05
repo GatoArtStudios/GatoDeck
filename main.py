@@ -9,7 +9,7 @@ import time
 import webbrowser
 import threading
 import subprocess
-from ui import run_ui
+#from ui import run_ui
 
 # configuraciones de Flask
 
@@ -43,47 +43,49 @@ def connect_obs(data):
     localhost = data['localhost']
     port = data['port']
     password = data['password']
+    print(localhost, port, password)
     apiObs.connect_to_obs(localhost, port, password)
-    socketio.emit('data-obs_connect', data)
-    socket_obs()
 
-@socketio.on('socket_data_obs')
-def socket_obs(data):
-    data1 = apiObs.get_data1()
-    data3 = apiObs.get_data3()
-    if data1:
-        socketio.emit('data-update1', data1)
-    if data3:
-        socketio.emit('data-update2', data3)
-    list_scenes = apiObs.get_list_obs_scenes()
+    socketio.emit('data-obs_connect', data)
+
+
+#@socketio.on('socket_data_obs')
+#def self.ocket_obs(data):
+    #data1 = apiObs.get_data1()
+    #data3 = apiObs.get_data3()
+    #if data1:
+        #socketio.emit('data-update1', data1)
+    #if data3:
+        #socketio.emit('data-update2', data3)
+    #list_scenes = apiObs.get_list_obs_scenes()
     # Obtener la información de los programas con audio
-    audio_sessions_info = obtener_programas_con_audio()
+    #audio_sessions_info = obtener_programas_con_audio()
 
     # Convertir a JSON
-    audio_sessions_json = json.dumps(audio_sessions_info, indent=4)
+    #audio_sessions_json = json.dumps(audio_sessions_info, indent=4)
 
     # Imprimir el JSON
-    print(audio_sessions_json)
-    emit('lista_programas', audio_sessions_json)
-    emit('post-list-scenes', list_scenes)
-    
+    #print(audio_sessions_json)
+    #emit('lista_programas', audio_sessions_json)
+    #emit('post-list-scenes', list_scenes)
+
 @socketio.on('set_volume')
 def establecerVolumen(data):
     nombre_proceso = data['nombre']
     volumen = float(data['volumen'])
     resultado = set_audio_volume(nombre_proceso, volumen)
     print(resultado)
-    
+
     # Convertir el diccionario en formato JSON
     json_data = json.dumps({
         'nombre_proceso': nombre_proceso,
         'volumen': volumen,
         'resultado': resultado
     })
-    
+
     # Emitir el evento con los datos en formato JSON
     emit('volumen_actualizado', json_data)
-    
+
 @socketio.on('set_scenne')
 def socket_obs(data):
     print(data['name'])
@@ -97,7 +99,7 @@ def test_button(data):
         apiBack.press(data)
 
 def flask_thread_function():
-    socketio.run(app, host='0.0.0.0', port=80, allow_unsafe_werkzeug=True, debug=False)
+    socketio.run(app, host='0.0.0.0', port=8080, allow_unsafe_werkzeug=True, debug=False)
 
 def main():
     ip = apiBack.get_ip()
@@ -107,10 +109,12 @@ def main():
     flask_thread.start()
 
     # Ejecutar el otro proceso (run_ui)
-    run_ui(ip)
+    #run_ui(ip)
 
     # Esperar a que Flask termine
     flask_thread.join()
+
+#apiObs.connect_to_obs("localhost", 4455, "123456")
 
 if __name__ == '__main__':
     main()
